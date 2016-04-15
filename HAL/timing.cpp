@@ -1,4 +1,4 @@
-#include "time.h"
+#include <timing.h>
 
 int32_t time_GetMillis(void) {
 	return Clock::Instance()->getTime_ms();
