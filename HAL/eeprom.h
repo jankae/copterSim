@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
-#include "../common/defines.h"
+#include "defines.h"
 #include <fstream>
 #include <iostream>
 

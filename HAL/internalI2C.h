@@ -2,7 +2,7 @@
 #ifndef INTERNALI2C_H_
 #define INTERNALI2C_H_
 
-#include "../hal.h"
+#include "hal.h"
 
 extern struct InternalI2C{
 	// this flag enables/disables the autoreading feature

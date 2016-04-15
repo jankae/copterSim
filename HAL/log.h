@@ -30,13 +30,13 @@
 #ifndef LOG_H_
 #define LOG_H_
 
-#include "../hal.h"
-#include "../String/stringconversion.h"
-#include "../distance.h"
-#include "../imu.h"
-#include "../accelerometer.h"
-#include "../gyro.h"
-#include "../externalSensors.h"
+#include "hal.h"
+#include "stringconversion.h"
+#include "distance.h"
+#include "imu.h"
+#include "accelerometer.h"
+#include "gyro.h"
+#include "externalSensors.h"
 #include <stdio.h>
 
 /********************************************
