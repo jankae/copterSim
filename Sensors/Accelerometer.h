@@ -7,7 +7,7 @@
 #include "../common/functions.h"
 #include <random>
 
-#define DEBUG_NOISE
+//#define DEBUG_NOISE
 
 class SensorAccelerometer {
 private:
