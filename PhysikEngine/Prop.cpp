@@ -3,7 +3,13 @@
 using namespace std;
 
 Prop::Prop(char *configFile, double diameter, double inert) {
+	dia = diameter;
+	inertia = inert;
 	ifstream fin(configFile);
+	if(!fin.is_open()){
+		cout << "ERROR: couldn't open prop file" << endl;
+		return;
+	}
 	string item;
 	string line;
 	getline(fin, line);
@@ -16,8 +22,10 @@ Prop::Prop(char *configFile, double diameter, double inert) {
 		coefficients.push_back(values);
 		values.clear();
 	}
-	dia = diameter;
-	inertia = inert;
+	if(coefficients.empty()){
+		cout << "ERROR: no prop coefficients" << endl;
+		return;
+	}
 //	cout << "ConfigFile:" << endl;
 //	vector<vector<double>>::iterator it_c;
 //	for (it_c = coefficients.begin(); it_c < coefficients.end(); it_c++) {
@@ -28,6 +36,10 @@ double Prop::get_thrust(double rpm) {
 	// thrust = C_t * p * rpm^2 * diameter^4
 	// interpolate coefficient C_t
 	double C_t = 0;
+	if(coefficients.empty()){
+		// no prop coefficients -> no way to calculate thrust
+		return 0.0;
+	}
 	vector<vector<double>>::iterator it = coefficients.begin();
 	for (; it < coefficients.end(); it++) {
 		if (rpm < (*it)[0])
@@ -68,6 +80,10 @@ double Prop::get_torque(double rpm) {
 	// C_q = C_p/2PI
 	// interpolate coefficient C_t
 	double C_p = 0;
+	if(coefficients.empty()){
+		// no prop coefficients -> no way to calculate torque
+		return 0.0;
+	}
 	vector<vector<double>>::iterator it = coefficients.begin();
 	for (; it < coefficients.end(); it++) {
 		if (rpm < (*it)[0])
