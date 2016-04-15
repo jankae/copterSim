@@ -11,15 +11,15 @@
 using namespace std;
 
 int main(void) {
-	Copter *c = new Copter( { 0, 0, 0 }, { 0, 0, 0 });
-	SensorAccelerometer *acc = new SensorAccelerometer( { 1000, 1000, 1000 },
-			{ 0.01, 0.01, 0.025 });
-	acc->attachToCopter(c);
-	for (int i = 0; i < 100; i++) {
-		vect a = acc->getValue();
-		acc->copyRawValue();
-		cout << a.x << " " << a.y << " " << a.z << endl;
-	}
+//	Copter *c = new Copter( { 0, 0, 0 }, { 0, 0, 0 });
+//	SensorAccelerometer *acc = new SensorAccelerometer( { 1000, 1000, 1000 },
+//			{ 0.01, 0.01, 0.025 });
+//	acc->attachToCopter(c);
+//	for (int i = 0; i < 100; i++) {
+//		vect a = acc->getValue();
+//		acc->copyRawValue();
+//		cout << a.x << " " << a.y << " " << a.z << endl;
+//	}
 //	Prop *p = new Prop("propConfig.csv", 0.254, 0.00004);
 //	for (int i = 1000; i < 7000; i += 100) {
 //		cout << "rpm: " << i << " thrust: " << p->get_thrust(i) << " torque: "
@@ -85,8 +85,8 @@ int main(void) {
 //	cout << "MagY:" << m.y << endl;
 //	cout << "MagZ:" << m.z << endl;
 
-//	Simulation::Instance();
-//
-//	log_Init();
-//	copter_MainProgram();
+	Simulation::Instance();
+
+	log_Init();
+	copter_MainProgram();
 }
