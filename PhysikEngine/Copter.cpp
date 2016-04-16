@@ -39,14 +39,26 @@ void Copter::setMotors(int16_t *velList) {
 	std::vector<P_Motor*>::iterator it;
 	int i = 0;
 //	cout << "motors: ";
+	double currentSum = 0;
 	for (it = motorList.begin(); it < motorList.end(); it++) {
 		(*it)->set_PWM(constrain(velList[i], 0, 255));
 //		cout << (int) velList[i] << " ";
 		motor.error[i] = 0;
+		currentSum += (*it)->current;
+		double uint8Current = (*it)->current * 10;
+		if (uint8Current > 255)
+			uint8Current = 255;
+		motor.rawCurrent[i] = (uint8_t) uint8Current;
 		i++;
 	}
+
+	// TODO this only works if the same battery is used for all motors
+	it = motorList.begin();
+	(*it)->bat->useCurrent(currentSum);
+
 //	cout << endl;
 }
+
 void Copter::calcAcceleration(void) {
 	vect torque = { 0, 0, 0 };
 	vect force = { 0, 0, 0 };
@@ -112,7 +124,7 @@ vect Copter::getCopterFrameGravitation(void) {
 }
 vect Copter::getCopterFrameMagneticField(void) {
 	vect magneticField = { cos(MAGNETIC_FIELD_DECLINATION * DEG_TO_RAD), 0, sin(
-			MAGNETIC_FIELD_DECLINATION * DEG_TO_RAD) };
+	MAGNETIC_FIELD_DECLINATION * DEG_TO_RAD) };
 	magneticField *= MAGNETIC_FIELD_STRENGTH;
 	return position->transformInv_Vect(magneticField);
 }
@@ -124,7 +136,7 @@ double Copter::getCopterMeanPWM(void) {
 		mean += (*it)->pwm;
 		i++;
 	}
-	if(i!=0)
+	if (i != 0)
 		mean /= i;
 	else
 		// no motors attached to copter
@@ -140,3 +152,4 @@ void Copter::printState(void) {
 //	cout << "CState " << position->px << endl;
 	write(fd_fifo, buffer, strlen(buffer));
 }
+

@@ -55,6 +55,7 @@ Simulation::Simulation() {
 	lastTask = starttime;
 	printTime = starttime;
 	handlerTime = starttime;
+	bat->copyRawValue();
 }
 
 void Simulation::Handler(void) {
@@ -99,6 +100,7 @@ void Simulation::Handler(void) {
 	}
 	copter->calcAcceleration();
 	copter->advanceState();
+	bat->copyRawValue();
 }
 
 void Simulation::setMotors(void) {

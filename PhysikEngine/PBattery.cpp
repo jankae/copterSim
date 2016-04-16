@@ -11,3 +11,6 @@ double P_Battery::get_Voltage(void) {
 	return voltage - current * resistance;
 }
 
+void P_Battery::copyRawValue(void) {
+	adc.raw[0] = this->get_Voltage() * 112.81f;
+}

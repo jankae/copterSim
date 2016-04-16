@@ -8,6 +8,8 @@
 #ifndef PBATTERY_H_
 #define PBATTERY_H_
 
+#include "adc.h"
+
 class P_Battery {
 private:
 	double voltage;
@@ -17,6 +19,7 @@ public:
 	P_Battery(double vol, double res);
 	void useCurrent(double cur);
 	double get_Voltage(void);
+	void copyRawValue(void);
 };
 
 #endif /* PBATTERY_H_ */
