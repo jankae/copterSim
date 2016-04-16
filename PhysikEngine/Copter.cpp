@@ -153,13 +153,6 @@ void Copter::printState(void) {
 	vect rpy = position->toRPY();
 	sprintf(buffer, "CState %f %f %f %f %f %f %d\n", position->px, position->py,
 			position->pz, rpy.x, rpy.y, rpy.z, !flightState.motorOff);
-
-//	std::vector<P_Motor*>::iterator it;
-//	cout << "Motorvalues:" << endl;
-//	for (it = motorList.begin(); it < motorList.end(); it++) {
-//		(*it)->printStats();
-//	}
-
 //	printf(buffer);
 //	cout << "CState " << position->px << endl;
 	write(fd_fifo, buffer, strlen(buffer));
