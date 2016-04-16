@@ -1,7 +1,6 @@
 #include "motors.h"
 
 void externalI2C_TriggerUpdate(void){
-	// TODO transfer motor values from motor.velocity into motor classes
 	Simulation::Instance()->setMotors();
 }
 
