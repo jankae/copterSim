@@ -6,11 +6,13 @@
 
 using namespace std;
 
-SensorReceiver::	SensorReceiver(int port) {
+SensorReceiver::SensorReceiver(int port) {
 	connectedToPort = false;
 	if(!RS232_OpenComport(port, 115200)){
 		connectedToPort = true;
 		this->port = port;
+	} else {
+		cout << "ERROR: couldn't open receiver port" << endl;
 	}
 }
 

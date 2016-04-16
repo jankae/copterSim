@@ -32,10 +32,10 @@ Simulation::Simulation() {
 	mot3 = new P_Motor(rpy, p, true);
 	p = {0,0.2,0};
 	mot4 = new P_Motor(rpy, p, false);
-	prop1 = new Prop("propConfig.csv", 0.254, 0.00004);
-	prop2 = new Prop("propConfig.csv", 0.254, 0.00004);
-	prop3 = new Prop("propConfig.csv", 0.254, 0.00004);
-	prop4 = new Prop("propConfig.csv", 0.254, 0.00004);
+	prop1 = new Prop((char*)"propConfig.csv", 0.254, 0.00004);
+	prop2 = new Prop((char*)"propConfig.csv", 0.254, 0.00004);
+	prop3 = new Prop((char*)"propConfig.csv", 0.254, 0.00004);
+	prop4 = new Prop((char*)"propConfig.csv", 0.254, 0.00004);
 	bat = new P_Battery(14.8, 0.01);
 	mot1->attachProp(prop1);
 	mot2->attachProp(prop2);
@@ -59,7 +59,7 @@ Simulation::Simulation() {
 
 void Simulation::Handler(void) {
 	long long time = Clock::Instance()->getTime_us();
-	long long timediff = time - handlerTime;
+//	long long timediff = time - handlerTime;
 	handlerTime = time;
 //	long freq = 1000000 / timediff;
 //	cout << "SimHandlerFreq:" << freq << endl;
@@ -82,7 +82,7 @@ void Simulation::Handler(void) {
 	if (time - printTime >= 50000) {
 		printTime += 50000;
 		copter->printState();
-		vect a = copter->position->toRPY();
+//		vect a = copter->position->toRPY();
 //		cout << "SRPY: " << a.x << " " << a.y << " " << a.z << endl;
 //		cout << "MRPY: " << attitude.roll << " " << attitude.pitch << " " << attitude.yaw << endl;
 //		cout << "Kalman states:";
