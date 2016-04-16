@@ -20,9 +20,11 @@ Simulation::Simulation() {
 	acc = new SensorAccelerometer( { 33, 33, 33 }, { 0.1, 0.1, 0.05 });
 	gyr = new SensorGyro( { 5, 7, 10 }, { 0.002, 0.0045, 0.0042 });
 	mag = new SensorMagnetometer( { 3, 5, 3 }, { 0, 0, 0 });
+	baro = new SensorBarometer(0, 0);
 	acc->attachToCopter(copter);
 	gyr->attachToCopter(copter);
 	mag->attachToCopter(copter);
+	baro->attachToCopter(copter);
 	// create motors
 	p = {0.2,0,0};
 	mot1 = new P_Motor(rpy, p, true);
@@ -52,6 +54,7 @@ Simulation::Simulation() {
 	rec = new SensorReceiver(16);
 	starttime = Clock::Instance()->getTime_us();
 	lastSensorUpdate = starttime;
+	lastBaroUpdate = starttime;
 	lastTask = starttime;
 	printTime = starttime;
 	handlerTime = starttime;
@@ -73,6 +76,11 @@ void Simulation::Handler(void) {
 		internali2c.gyroAvailable = SET;
 		internali2c.magAvailable = SET;
 		sensorTrigger.newDataI2C = 1;
+	}
+	if(time-lastBaroUpdate >= SIMULATION_BARO_PERIOD){
+		lastBaroUpdate += SIMULATION_BARO_PERIOD;
+		baro->copyRawValue();
+		sensorTrigger.newDataExternalADC = 1;
 	}
 	if (time - lastTask >= SIMULATION_TASKS_PERIOD) {
 		lastTask += SIMULATION_TASKS_PERIOD;
