@@ -72,9 +72,9 @@ void Copter::calcAcceleration(void) {
 	}
 	// transform force vector from copter frame to world frame
 	force = position->transform_Vect(force);
-	acceleration = force / weight;
 	// subtract drag TODO implement this in the copter frame (3 different drag coefficients would be possible)
-	acceleration -= velocity * dragCoefficient;
+	force -= velocity * dragCoefficient;
+	acceleration = force / weight;
 	// add gravity
 	acceleration.z += 9.81;
 
