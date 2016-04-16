@@ -16,7 +16,7 @@ P_Motor::P_Motor(vect rpy, vect p, bool CW) {
 	voltage = 0;
 	KV = 760;
 	resistance = 0.290;
-	inertia = 0.00000001;
+	inertia = 0.0000038;
 	pwm = 0;
 }
 void P_Motor::attachProp(Prop *p) {
@@ -167,3 +167,14 @@ double P_Motor::torqueYaw(void) {
 	return get_Thrust() * (magn * dist * sin(angle)) + angtorque;
 }
 
+void P_Motor::printStats(void) {
+	cout << "motStats:" << voltage << "V " << current << "A "
+			<< current * voltage << "W " << rpm << "rpm" << endl;
+	if (prop) {
+		double thrust = prop->get_thrust(rpm);
+		double torque = prop->get_torque(rpm);
+		double power = rpm / 60 * 2 * M_PI * torque;
+		cout << "propStats:" << thrust << "N " << torque << "Nm " << power
+				<< "W" << endl;
+	}
+}

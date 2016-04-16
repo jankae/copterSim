@@ -47,7 +47,7 @@ public:
 	double torqueRoll(void);
 	double torquePitch(void);
 	double torqueYaw(void);
-
+	void printStats(void);
 };
 
 #endif /* MOTOR_H_ */
