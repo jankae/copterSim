@@ -131,6 +131,16 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<sourceEntries>
+						<entry excluding="core|common|Simulation|Sensors|PhysikEngine|HAL" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="HAL"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="PhysikEngine"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Sensors"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="Simulation"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="common"/>
+						<entry excluding="String" flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="core"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="core/String"/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
@@ -163,4 +173,5 @@
 			<resource resourceType="PROJECT" workspacePath="/copterSim"/>
 		</configuration>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>
