@@ -17,9 +17,9 @@ Simulation::Simulation() {
 	vect p = { 0, 0, -10 };
 	copter = new Copter(rpy, p);
 	// create sensors
-	acc = new SensorAccelerometer( { 1000, 1000, 1000 }, { 0.01, 0.01, 0.0025 });
-	gyr = new SensorGyro( { 20, 50, 100 }, { 0.000004, 0.00002, 0.000018 });
-	mag = new SensorMagnetometer( { 10, 30, 10 }, { 0, 0, 0 });
+	acc = new SensorAccelerometer( { 33, 33, 33 }, { 0.1, 0.1, 0.05 });
+	gyr = new SensorGyro( { 5, 7, 10 }, { 0.002, 0.0045, 0.0042 });
+	mag = new SensorMagnetometer( { 3, 5, 3 }, { 0, 0, 0 });
 	acc->attachToCopter(copter);
 	gyr->attachToCopter(copter);
 	mag->attachToCopter(copter);
