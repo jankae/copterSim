@@ -40,7 +40,7 @@ double P_Motor::get_torque(void) {
 		torque = 60 * voltage / (KV * resistance * 2 * M_PI);
 	} else {
 		double velocity = rpm / 60 * 2 * M_PI;
-		torque = backEMF * current / velocity;
+		torque = voltage * current / velocity;
 	}
 	// account for efficiency
 	torque *= 0.76;
