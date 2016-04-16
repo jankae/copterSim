@@ -40,7 +40,7 @@ void SensorMagnetometer::copyRawValue(void) {
 	int32_t magZ = -mag.z * 1370;
 	// add noise
 	double meanPWM = this->copter->getCopterMeanPWM();
-	meanPWM = pow(meanPWM, 4);
+	meanPWM = pow(meanPWM, 2);
 	std::normal_distribution<double> distributionX(0,
 			zeroNoise.x + meanPWM * NoiseFactor.x);
 	magX += distributionX(gen);
