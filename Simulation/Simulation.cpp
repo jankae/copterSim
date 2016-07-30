@@ -20,7 +20,7 @@ Simulation::Simulation() {
 	acc = new SensorAccelerometer( { 33, 33, 33 }, { 0.1, 0.1, 0.05 });
 	gyr = new SensorGyro( { 5, 7, 10 }, { 0.002, 0.0045, 0.0042 });
 	mag = new SensorMagnetometer( { 3, 5, 3 }, { 0, 0, 0 });
-	baro = new SensorBarometer(0, 0);
+	baro = new SensorBarometer(65, 0);
 	acc->attachToCopter(copter);
 	gyr->attachToCopter(copter);
 	mag->attachToCopter(copter);
@@ -34,10 +34,10 @@ Simulation::Simulation() {
 	mot3 = new P_Motor(rpy, p, true);
 	p = {0,0.2,0};
 	mot4 = new P_Motor(rpy, p, false);
-	prop1 = new Prop((char*)"propConfig.csv", 0.254, 0.00004);
-	prop2 = new Prop((char*)"propConfig.csv", 0.254, 0.00004);
-	prop3 = new Prop((char*)"propConfig.csv", 0.254, 0.00004);
-	prop4 = new Prop((char*)"propConfig.csv", 0.254, 0.00004);
+	prop1 = new Prop((char*) "propConfig.csv", 0.254, 0.00004);
+	prop2 = new Prop((char*) "propConfig.csv", 0.254, 0.00004);
+	prop3 = new Prop((char*) "propConfig.csv", 0.254, 0.00004);
+	prop4 = new Prop((char*) "propConfig.csv", 0.254, 0.00004);
 	bat = new P_Battery(14.8, 0.01);
 	mot1->attachProp(prop1);
 	mot2->attachProp(prop2);
@@ -77,7 +77,7 @@ void Simulation::Handler(void) {
 		internali2c.magAvailable = SET;
 		sensorTrigger.newDataI2C = 1;
 	}
-	if(time-lastBaroUpdate >= SIMULATION_BARO_PERIOD){
+	if (time - lastBaroUpdate >= SIMULATION_BARO_PERIOD) {
 		lastBaroUpdate += SIMULATION_BARO_PERIOD;
 		baro->copyRawValue();
 		sensorTrigger.newDataExternalADC = 1;

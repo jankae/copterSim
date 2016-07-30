@@ -18,6 +18,8 @@ double SensorBarometer::getValue(void) {
 }
 
 void SensorBarometer::copyRawValue(void) {
+    std::random_device rd;
+    std::mt19937 gen(rd());
 	// no temperature sensor data available
 	adc.raw[5] = 0;
 	// sensor has a sensitivity of 4.6mV/hPa
@@ -27,6 +29,12 @@ void SensorBarometer::copyRawValue(void) {
 	const double ADC_ref = 2.5;
 	// ADC value at Vref is 2^21 (=0x200000)
 	uint32_t adcValue = ((ADC_p - ADC_n) / 2.5) * 0x200000;
+	// add noise
+	double meanPWM = this->copter->getCopterMeanPWM();
+	meanPWM = pow(meanPWM, 2);
+	std::normal_distribution<double> distributionX(0,
+			zeroNoise + meanPWM * NoiseFactor);
+	adcValue += distributionX(gen);
 	pressure.rawADC = adcValue;
 }
 
